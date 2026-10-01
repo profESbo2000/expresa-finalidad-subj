@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Arte de la Finalidad | Subjuntivo con "Para que"</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0F172A;
+      --bg-card: rgba(30, 41, 59, 0.7);
+      --accent-pink: #EC4899;
+      --accent-purple: #8B5CF6;
+      --accent-cyan: #06B6D4;
+      --accent-emerald: #10B981;
+      --accent-yellow: #F59E0B;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --border-glow: rgba(139, 92, 246, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Header Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(15, 23, 42, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 0.6rem 1.2rem;
+      border-radius: 99px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4);
+    }
+
+    /* Main Layout */
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 5rem;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #FFF, var(--text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Cards Component */
+    .glass-card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid var(--border-glow);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Teoria Section */
+    .formula-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .formula-chip {
+      padding: 1rem 1.5rem;
+      border-radius: 16px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .chip-person1 { background: rgba(236, 72, 153, 0.2); border: 2px solid var(--accent-pink); color: #F472B6; }
+    .chip-connector { background: rgba(245, 158, 11, 0.2); border: 2px solid var(--accent-yellow); color: #FBBF24; font-size: 1.5rem; }
+    .chip-person2 { background: rgba(6, 182, 212, 0.2); border: 2px solid var(--accent-cyan); color: #38BDF8; }
+
+    .illustration-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 2rem 0;
+      border: 1px dashed rgba(255,255,255,0.2);
+    }
+
+    .svg-flower {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.6));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      border-radius: 20px;
+      padding: 1.2rem 2rem;
+      color: white;
+      font-weight: 800;
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+      letter-spacing: 0.5px;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 0 12px 12px;
+      border-style: solid;
+      border-color: var(--accent-purple) transparent;
+      display: block;
+      width: 0;
+    }
+
+    .rule-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-emerald);
+      color: var(--accent-emerald);
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    /* Comprensión Lectora */
+    .reading-card {
+      background: rgba(15, 23, 42, 0.5);
+      border-left: 4px solid var(--accent-cyan);
+      border-radius: 0 16px 16px 0;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .reading-highlight {
+      background: rgba(245, 158, 11, 0.2);
+      color: var(--accent-yellow);
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .question-block {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 1rem;
+      color: var(--text-main);
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-purple);
+    }
+
+    .option-btn.correct, .vf-btn.correct {
+      background: rgba(16, 185, 129, 0.2) !important;
+      border-color: var(--accent-emerald) !important;
+      color: #6EE7B7 !important;
+    }
+
+    .option-btn.wrong, .vf-btn.wrong {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: #EF4444 !important;
+      color: #FCA5A5 !important;
+    }
+
+    /* Verdadero / Falso Specific */
+    .vf-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    .vf-btn {
+      flex: 1;
+      padding: 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .vf-btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* Ejercicios de Emparejamiento (10 Items) */
+    .matching-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .matching-container { grid-template-columns: 1fr; }
+    }
+
+    .matching-column {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .match-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .match-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateX(4px);
+    }
+
+    .match-item.selected {
+      border-color: var(--accent-pink);
+      background: rgba(236, 72, 153, 0.15);
+      box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+    }
+
+    .match-item.matched {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: var(--accent-emerald);
+      color: var(--accent-emerald);
+      cursor: default;
+      transform: none;
+    }
+
+    .badge-num {
+      background: rgba(255, 255, 255, 0.1);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-right: 0.8rem;
+    }
+
+    .score-banner {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+      border: 1px solid var(--accent-cyan);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 2rem;
+      display: none;
+    }
+
+    .score-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-cyan);
+    }
+
+    .subj-highlight {
+      color: var(--accent-pink);
+      font-weight: 700;
+      border-bottom: 2px dashed var(--accent-pink);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span>✨ SubjuntivoLab</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="showSection('teoria', this)">📚 Teoria</button>
+      <button class="nav-btn" onclick="showSection('lectura1', this)">📖 Lectura I</button>
+      <button class="nav-btn" onclick="showSection('ejercicios', this)">⚡ 10 Ejercicios</button>
+      <button class="nav-btn" onclick="showSection('lectura2', this)">📖 Lectura II</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SECCIÓN 1: TEORÍA -->
+    <section id="teoria" class="section active">
+      <h1 class="hero-title">Expresando la Finalidad</h1>
+      <p class="hero-subtitle">Descubre cómo conectar tus intenciones usando el Subjuntivo</p>
+
+      <div class="glass-card">
+        <div class="rule-badge">📌 Regla de Oro</div>
+        <h2>Estructura con "Para que"</h2>
+        <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 1.05rem;">
+          Usamos obligatoriamente el <strong style="color: var(--text-main);">Subjuntivo</strong> siempre que tengamos la expresión <strong style="color: var(--accent-yellow);">"para que"</strong> entre <strong style="color: var(--accent-pink);">dos personas diferentes</strong> (Sujeto 1 y Sujeto 2) y <strong style="color: var(--accent-cyan);">dos verbos distintos</strong>.
+        </p>
+
+        <div class="formula-box">
+          <div class="formula-chip chip-person1">
+            Persona A (Sujeto 1)<br>
+            <small style="font-weight:400; font-size:0.8rem;">[Verbo 1: Indicativo]</small><br>
+            <em>Yo te doy este libro</em>
+          </div>
+          <div class="formula-chip chip-connector">+ PARA QUE +</div>
+          <div class="formula-chip chip-person2">
+            Persona B (Sujeto 2)<br>
+            <small style="font-weight:400; font-size:0.8rem;">[Verbo 2: Subjuntivo]</small><br>
+            <em>tú <span class="subj-highlight">estudies</span> español</em>
+          </div>
+        </div>
+
+        <div class="illustration-container">
+          <svg class="svg-flower" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="45" fill="rgba(236, 72, 153, 0.1)" stroke="#EC4899" stroke-width="2"/>
+            <path d="M50 80 C 50 60, 55 50, 50 35" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
+            <path d="M50 65 C 35 60, 30 50, 50 55" fill="#10B981"/>
+            <path d="M50 60 C 65 55, 70 45, 50 50" fill="#10B981"/>
+            <circle cx="50" cy="20" r="10" fill="#EC4899"/>
+            <circle cx="62" cy="28" r="10" fill="#F472B6"/>
+            <circle cx="58" cy="42" r="10" fill="#EC4899"/>
+            <circle cx="42" cy="42" r="10" fill="#F472B6"/>
+            <circle cx="38" cy="28" r="10" fill="#EC4899"/>
+            <circle cx="50" cy="32" r="8" fill="#F59E0B"/>
+          </svg>
+
+          <div class="speech-bubble">
+            👦 Niño: "TE REGALO ESTA FLOR PARA QUE <span style="text-decoration: underline; color: #FBBF24;">ESTÉS</span> FELIZ" 👩
+          </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-muted); font-style: italic;">
+          Nota: El niño realiza la acción (regalar), pero la finalidad recae en la emoción de la otra persona (estar feliz). ¡Por eso usamos Subjuntivo!
+        </p>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: COMPRENSIÓN LECTORA I -->
+    <section id="lectura1" class="section">
+      <h1 class="hero-title">Comprensión Lectora I</h1>
+      <p class="hero-subtitle">Misión Secreta en el Laboratorio</p>
+
+      <div class="glass-card">
+        <div class="reading-card">
+          <p>
+            El profesor Martínez ha trabajado durante cinco años en un invento revolucionario. Hoy llamó a su joven asistente, Sofía, y le dijo: 
+            <em>"—Sofía, te entrego estas llaves especiales <span class="reading-highlight">para que abras</span> la caja fuerte del laboratorio esta noche. Te he dejado unos documentos de clave <span class="reading-highlight">para que los memorices</span> antes de la reunión de mañana. Además, te prestaré mi linterna <span class="reading-highlight">para que no te tropieces</span> en el pasillo oscuro."</em>
+          </p>
+          <p style="margin-top: 1rem;">
+            Sofía sabe que la misión es delicada. Su objetivo es proteger la fórmula antes de que los competidores intenten robarla.
+          </p>
+        </div>
+
+        <div class="question-block">
+          <h3>1. ¿Para qué le da el profesor las llaves a Sofía?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="checkAnswer(this, false)">A) Para que limpie el laboratorio.</button>
+            <button class="option-btn" onclick="checkAnswer(this, true)">B) Para que abra la caja fuerte esta noche.</button>
+            <button class="option-btn" onclick="checkAnswer(this, false)">C) Para que se las entregue a los competidores.</button>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <h3>2. ¿Con qué finalidad le presta su linterna?</h3>
+          <div class="options-grid">
+            <button class="option-btn" onclick="checkAnswer(this, false)">A) Para que busque un tesoro escondido.</button>
+            <button class="option-btn" onclick="checkAnswer(this, true)">B) Para que no se tropiece en el pasillo.</button>
+            <button class="option-btn" onclick="checkAnswer(this, false)">C) Para que ilumine la calle exterior.</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 3: EJERCICIOS DE EMPAREJAMIENTO -->
+    <section id="ejercicios" class="section">
+      <h1 class="hero-title">10 Ejercicios Interactivos</h1>
+      <p class="hero-subtitle">Conecta las oraciones de la izquierda con su finalidad desordenada a la derecha</p>
+
+      <div class="glass-card">
+        <p style="margin-bottom: 1rem; color: var(--text-muted);">
+          👉 Haz clic en una oración de la <strong>Columna A</strong> y luego encuentra su complemento correcto en la <strong>Columna B</strong>.
+        </p>
+
+        <div class="matching-container">
+          <!-- Columna A -->
+          <div class="matching-column" id="col-a">
+            <div class="match-item" data-id="1" onclick="selectMatch('A', 1, this)">
+              <span><span class="badge-num">1</span> Yo te doy este sacacorchos...</span>
+            </div>
+            <div class="match-item" data-id="2" onclick="selectMatch('A', 2, this)">
+              <span><span class="badge-num">2</span> Te compraré una olla...</span>
+            </div>
+            <div class="match-item" data-id="3" onclick="selectMatch('A', 3, this)">
+              <span><span class="badge-num">3</span> Te dejo mi rotulador...</span>
+            </div>
+            <div class="match-item" data-id="4" onclick="selectMatch('A', 4, this)">
+              <span><span class="badge-num">4</span> Te he traído unos cuantos pasatiempos...</span>
+            </div>
+            <div class="match-item" data-id="5" onclick="selectMatch('A', 5, this)">
+              <span><span class="badge-num">5</span> Te voy a dejar este destornillador...</span>
+            </div>
+            <div class="match-item" data-id="6" onclick="selectMatch('A', 6, this)">
+              <span><span class="badge-num">6</span> Te he traído unos trapos y una fregona...</span>
+            </div>
+            <div class="match-item" data-id="7" onclick="selectMatch('A', 7, this)">
+              <span><span class="badge-num">7</span> Te presto mi paraguas...</span>
+            </div>
+            <div class="match-item" data-id="8" onclick="selectMatch('A', 8, this)">
+              <span><span class="badge-num">8</span> Te envío la ubicación por GPS...</span>
+            </div>
+            <div class="match-item" data-id="9" onclick="selectMatch('A', 9, this)">
+              <span><span class="badge-num">9</span> Te enciendo la luz...</span>
+            </div>
+            <div class="match-item" data-id="10" onclick="selectMatch('A', 10, this)">
+              <span><span class="badge-num">10</span> Te pongo una manta...</span>
+            </div>
+          </div>
+
+          <!-- Columna B -->
+          <div class="matching-column" id="col-b">
+            <div class="match-item" data-match="6" onclick="selectMatch('B', 'c', this)">
+              <span>...para que limpies toda la cocina.</span>
+            </div>
+            <div class="match-item" data-match="1" onclick="selectMatch('B', 'd', this)">
+              <span>...para que abras la botella de vino.</span>
+            </div>
+            <div class="match-item" data-match="5" onclick="selectMatch('B', 'f', this)">
+              <span>...para que aprietes los tornillos.</span>
+            </div>
+            <div class="match-item" data-match="2" onclick="selectMatch('B', 'a', this)">
+              <span>...para que puedas cocinar sopa.</span>
+            </div>
+            <div class="match-item" data-match="10" onclick="selectMatch('B', 'j', this)">
+              <span>...para que no tengas frío esta noche.</span>
+            </div>
+            <div class="match-item" data-match="3" onclick="selectMatch('B', 'e', this)">
+              <span>...para que subrayes las palabras importantes.</span>
+            </div>
+            <div class="match-item" data-match="8" onclick="selectMatch('B', 'h', this)">
+              <span>...para que encuentres el restaurante fácilmente.</span>
+            </div>
+            <div class="match-item" data-match="4" onclick="selectMatch('B', 'b', this)">
+              <span>...para que te entretengas en casa.</span>
+            </div>
+            <div class="match-item" data-match="7" onclick="selectMatch('B', 'g', this)">
+              <span>...para que no te mojes con la lluvia.</span>
+            </div>
+            <div class="match-item" data-match="9" onclick="selectMatch('B', 'i', this)">
+              <span>...para que puedas leer con comodidad.</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="score-banner" class="score-banner">
+          <div class="score-title">🎉 ¡Excelente Trabajo!</div>
+          <p>Has encontrado todas las parejas correctamente en el orden adecuado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN 4: COMPRENSIÓN LECTORA II (CON CORRECCIÓN EN VIVO) -->
+    <section id="lectura2" class="section">
+      <h1 class="hero-title">Comprensión Lectora II</h1>
+      <p class="hero-subtitle">Preparando una Fiesta Sorpresa (Verdadero o Falso)</p>
+
+      <div class="glass-card">
+        <div class="reading-card" style="border-left-color: var(--accent-pink);">
+          <p>
+            Carlos está organizando el cumpleaños sorpresa de su hermana Lucía. Ha reunido a sus amigos para repartir las tareas:
+          </p>
+          <p style="margin-top: 0.8rem;">
+            <em>"—Marta, te paso el número del pastelero <span class="reading-highlight">para que encargues</span> la tarta de chocolate. Andrés, te dejo las llaves del salón <span class="reading-highlight">para que decores</span> con globos antes de las cinco. Y yo hablaré con los padres de Lucía <span class="reading-highlight">para que la lleven</span> a pasear y no sospeche nada."</em>
+          </p>
+        </div>
+
+        <!-- Pregunta 1 -->
+        <div class="question-block">
+          <h3>1. Carlos le da el número a Marta para que pague la comida de la fiesta.</h3>
+          <div class="vf-container">
+            <button class="vf-btn" onclick="checkVF(this, false)">Verdadero</button>
+            <button class="vf-btn" onclick="checkVF(this, true)">Falso</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="question-block">
+          <h3>2. La finalidad de entregarle las llaves a Andrés es para que decore el salón con globos.</h3>
+          <div class="vf-container">
+            <button class="vf-btn" onclick="checkVF(this, true)">Verdadero</button>
+            <button class="vf-btn" onclick="checkVF(this, false)">Falso</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question-block">
+          <h3>3. Andrés debe decorar el salón después de las seis de la tarde.</h3>
+          <div class="vf-container">
+            <button class="vf-btn" onclick="checkVF(this, false)">Verdadero</button>
+            <button class="vf-btn" onclick="checkVF(this, true)">Falso</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question-block">
+          <h3>4. Carlos habla con los padres de Lucía para que la saquen a pasear.</h3>
+          <div class="vf-container">
+            <button class="vf-btn" onclick="checkVF(this, true)">Verdadero</button>
+            <button class="vf-btn" onclick="checkVF(this, false)">Falso</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question-block">
+          <h3>5. La meta principal de llevar a Lucía a pasear es para que ella no sospeche nada de la sorpresa.</h3>
+          <div class="vf-container">
+            <button class="vf-btn" onclick="checkVF(this, true)">Verdadero</button>
+            <button class="vf-btn" onclick="checkVF(this, false)">Falso</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Audio FX con Web Audio API
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'click') {
+        osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+      } else if (type === 'success') {
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(783.99, audioCtx.currentTime + 0.2);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
+      } else if (type === 'wrong') {
+        osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.2);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+      }
+    }
+
+    // Control de navegación
+    function showSection(sectionId, btn) {
+      playSound('click');
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      
+      document.getElementById(sectionId).classList.add('active');
+      btn.classList.add('active');
+      
+      if (sectionId === 'ejercicios') {
+        shuffleColumnB();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Función para desordenar la columna B
+    function shuffleColumnB() {
+      const container = document.getElementById('col-b');
+      const items = Array.from(container.children);
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        container.appendChild(items[j]);
+      }
+    }
+
+    // Comprobador de respuestas de Opción Múltiple
+    function checkAnswer(btn, isCorrect) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('.option-btn').forEach(b => {
+        b.disabled = true;
+        b.classList.remove('correct', 'wrong');
+      });
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        playSound('success');
+      } else {
+        btn.classList.add('wrong');
+        playSound('wrong');
+      }
+    }
+
+    // Comprobador de Verdadero / Falso (CORRECCIÓN EN VIVO)
+    function checkVF(btn, isCorrect) {
+      const parent = btn.parentElement;
+      
+      // Deshabilitar ambos botones para bloquear la pregunta tras seleccionar
+      parent.querySelectorAll('.vf-btn').forEach(b => {
+        b.disabled = true;
+        b.style.cursor = 'default';
+      });
+
+      // Evaluar la opción seleccionada al instante
+      if (isCorrect) {
+        btn.classList.add('correct');
+        playSound('success');
+      } else {
+        btn.classList.add('wrong');
+        playSound('wrong');
+      }
+    }
+
+    // Lógica de Emparejamiento
+    let selectedA = null;
+    let selectedB = null;
+    let matchedCount = 0;
+
+    function selectMatch(col, id, el) {
+      if (el.classList.contains('matched')) return;
+
+      playSound('click');
+
+      if (col === 'A') {
+        if (selectedA) selectedA.el.classList.remove('selected');
+        selectedA = { id: id, el: el };
+        el.classList.add('selected');
+      } else if (col === 'B') {
+        if (selectedB) selectedB.el.classList.remove('selected');
+        selectedB = { match: el.getAttribute('data-match'), el: el };
+        el.classList.add('selected');
+      }
+
+      if (selectedA && selectedB) {
+        if (parseInt(selectedA.id) === parseInt(selectedB.match)) {
+          selectedA.el.classList.remove('selected');
+          selectedB.el.classList.remove('selected');
+          selectedA.el.classList.add('matched');
+          selectedB.el.classList.add('matched');
+
+          playSound('success');
+          matchedCount++;
+
+          selectedA = null;
+          selectedB = null;
+
+          if (matchedCount === 10) {
+            document.getElementById('score-banner').style.display = 'block';
+          }
+        } else {
+          playSound('wrong');
+          setTimeout(() => {
+            if (selectedA) selectedA.el.classList.remove('selected');
+            if (selectedB) selectedB.el.classList.remove('selected');
+            selectedA = null;
+            selectedB = null;
+          }, 400);
+        }
+      }
+    }
+
+    // Desordenar al cargar la página
+    window.onload = shuffleColumnB;
+  </script>
+</body>
+</html>
